@@ -1,10 +1,10 @@
 /*
  Package:
     MiFare Classic Universal toolKit (MFCUK)
- 
+
  Package version:
     0.1
- 
+
  Filename:
     mfcuk_mifare.h
 
@@ -20,7 +20,7 @@
     GPL2 (see below), Copyright (C) 2009, Andrei Costin
 
  * @file mfcuk_mifare.h
- * @brief 
+ * @brief
 */
 
 /*
@@ -40,14 +40,14 @@
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 2 of the License, or
  (at your option) any later version.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
- 
+
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #ifndef _MFCUK_MIFARE_H_
@@ -100,46 +100,46 @@
 
 // Define an extended type of dump, basically a wrapper dump around basic tag dump
 typedef struct {
-    uint32_t uid;  // looks redundant, but it is easier to use dmp.uid instead of dmp.amb.mbm.abtUID[0]...[3]
-    byte_t type; // ATS/SAK from ti.tia.btSak, example 0x08h for Mifare 1K, 0x18h for Mifare 4K
-    char datetime[14]; // non-zero-terminated date-time of dump in format YYYYMMDDH24MISS, example 20091114231541 - 14 Nov 2009, 11:15:41 PM
-    char description[MFCUK_EXTENDED_DESCRIPTION_LENGTH]; // a description of the tag dump, example "RATB_DUMP_BEFORE_PAY"
-    mifare_classic_tag tag_basic;
+  uint32_t uid;  // looks redundant, but it is easier to use dmp.uid instead of dmp.amb.mbm.abtUID[0]...[3]
+  uint8_t type; // ATS/SAK from ti.tia.btSak, example 0x08h for Mifare 1K, 0x18h for Mifare 4K
+  char datetime[14]; // non-zero-terminated date-time of dump in format YYYYMMDDH24MISS, example 20091114231541 - 14 Nov 2009, 11:15:41 PM
+  char description[MFCUK_EXTENDED_DESCRIPTION_LENGTH]; // a description of the tag dump, example "RATB_DUMP_BEFORE_PAY"
+  mifare_classic_tag tag_basic;
 } mifare_classic_tag_ext;
 
 // Define type of keys (A or B) in NXP notation
 typedef enum {
-    keyA = 0x60,
-    keyB = 0x61,
+  keyA = 0x60,
+  keyB = 0x61,
 } mifare_key_type;
 
 // Default keys used as a *BIG* mistake in many applications - especially System Integrators should pay attention!
-extern byte_t mfcuk_default_keys[][MIFARE_CLASSIC_KEY_BYTELENGTH];
+extern uint8_t mfcuk_default_keys[][MIFARE_CLASSIC_KEY_BYTELENGTH];
 extern int mfcuk_default_keys_num;
 
-bool is_valid_block(byte_t bTagType, uint32_t uiBlock);
-bool is_valid_sector(byte_t bTagType, uint32_t uiSector);
-bool is_first_block(byte_t bTagType, uint32_t uiBlock);
-bool is_trailer_block(byte_t bTagType, uint32_t uiBlock);
-uint32_t get_first_block(byte_t bTagType, uint32_t uiBlock);
-uint32_t get_trailer_block(byte_t bTagType, uint32_t uiBlock);
-bool is_big_sector(byte_t bTagType, uint32_t uiSector);
-uint32_t get_first_block_for_sector(byte_t bTagType, uint32_t uiSector);
-uint32_t get_trailer_block_for_sector(byte_t bTagType, uint32_t uiSector);
-uint32_t get_sector_for_block(byte_t bTagType, uint32_t uiBlock);
-bool is_first_sector(byte_t bTagType, uint32_t uiSector);
-bool is_first_big_sector(byte_t bTagType, uint32_t uiSector);
-bool is_first_small_sector(byte_t bTagType, uint32_t uiSector);
-bool is_last_sector(byte_t bTagType, uint32_t uiSector);
-bool is_last_big_sector(byte_t bTagType, uint32_t uiSector);
-bool is_last_small_sector(byte_t bTagType, uint32_t uiSector);
-void test_mifare_classic_blocks_sectors_functions(byte_t bTagType);
-bool mfcuk_save_tag_dump(char *filename, mifare_classic_tag *tag);
-bool mfcuk_save_tag_dump_ext(char *filename, mifare_classic_tag_ext *tag_ext);
-bool mfcuk_load_tag_dump(char *filename, mifare_classic_tag *tag);
-bool mfcuk_load_tag_dump_ext(char *filename, mifare_classic_tag_ext *tag_ext);
+bool is_valid_block(uint8_t bTagType, uint32_t uiBlock);
+bool is_valid_sector(uint8_t bTagType, uint32_t uiSector);
+bool is_first_block(uint8_t bTagType, uint32_t uiBlock);
+bool is_trailer_block(uint8_t bTagType, uint32_t uiBlock);
+uint32_t get_first_block(uint8_t bTagType, uint32_t uiBlock);
+uint32_t get_trailer_block(uint8_t bTagType, uint32_t uiBlock);
+bool is_big_sector(uint8_t bTagType, uint32_t uiSector);
+uint32_t get_first_block_for_sector(uint8_t bTagType, uint32_t uiSector);
+uint32_t get_trailer_block_for_sector(uint8_t bTagType, uint32_t uiSector);
+uint32_t get_sector_for_block(uint8_t bTagType, uint32_t uiBlock);
+bool is_first_sector(uint8_t bTagType, uint32_t uiSector);
+bool is_first_big_sector(uint8_t bTagType, uint32_t uiSector);
+bool is_first_small_sector(uint8_t bTagType, uint32_t uiSector);
+bool is_last_sector(uint8_t bTagType, uint32_t uiSector);
+bool is_last_big_sector(uint8_t bTagType, uint32_t uiSector);
+bool is_last_small_sector(uint8_t bTagType, uint32_t uiSector);
+void test_mifare_classic_blocks_sectors_functions(uint8_t bTagType);
+bool mfcuk_save_tag_dump(const char *filename, mifare_classic_tag *tag);
+bool mfcuk_save_tag_dump_ext(const char *filename, mifare_classic_tag_ext *tag_ext);
+bool mfcuk_load_tag_dump(const char *filename, mifare_classic_tag *tag);
+bool mfcuk_load_tag_dump_ext(const char *filename, mifare_classic_tag_ext *tag_ext);
 void print_mifare_classic_tag_keys(const char *title, mifare_classic_tag *tag);
-bool mfcuk_key_uint64_to_arr(const uint64_t *ui64Key, byte_t *arr6Key);
-bool mfcuk_key_arr_to_uint64(const byte_t *arr6Key, uint64_t *ui64Key);
+bool mfcuk_key_uint64_to_arr(const uint64_t *ui64Key, uint8_t *arr6Key);
+bool mfcuk_key_arr_to_uint64(const uint8_t *arr6Key, uint64_t *ui64Key);
 
 #endif // _MFCUK_MIFARE_H_
